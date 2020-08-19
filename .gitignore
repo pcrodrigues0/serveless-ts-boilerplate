@@ -185,7 +185,8 @@ DerivedData/
 .idea/**/tasks.xml
 .idea/**/usage.statistics.xml
 .idea/**/dictionaries
-.idea/**/shelf
+.idea/
+./.webpack
 
 # Generated files
 .idea/**/contentModel.xml
@@ -249,3 +250,15 @@ fabric.properties
 # Android studio 3.1+ serialized cache file
 .idea/caches/build_file_checksums.ser
 
+.idea/.gitignore
+.idea/misc.xml
+.idea/modules.xml
+.idea/serveless-ts.iml
+.idea/vcs.xml
+.webpack/
+index.ts
+package.json
+serverless.yml
+tsconfig.json
+webpack.config.js
+yarn.lock
