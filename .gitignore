@@ -256,9 +256,3 @@ fabric.properties
 .idea/serveless-ts.iml
 .idea/vcs.xml
 .webpack/
-index.ts
-package.json
-serverless.yml
-tsconfig.json
-webpack.config.js
-yarn.lock

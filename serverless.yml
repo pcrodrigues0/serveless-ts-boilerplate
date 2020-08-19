@@ -1,0 +1,64 @@
+service:
+  name: app-user-create
+package:
+  individually: true
+  excludeDevDependencies: true
+  exclude:
+    - ./**
+    - serverless-http
+
+frameworkVersion: ">=1.0.0 <2.0.0"
+
+provider:
+  name: aws
+  region: us-east-1
+  runtime: nodejs12.x
+  tags:
+    projeto: tropicalcbd-app
+  stage: ${opt:stage, 'dev'}
+  memorySize: 128
+  versionFunctions: false
+  deploymentBucket:
+    name: dev-tropicalcbd-deploys
+
+functions:
+  app:
+    handler: index.handler
+    events:
+      - http:
+          method: ANY
+          path: "/"
+          cors: true
+      - http:
+          method: ANY
+          path: "{proxy+}"
+          cors: true
+    environment:
+      IDENTITY_POOL_ID: us-east-1:d48394c1-1edf-4b05-b51d-85f2a49f2014
+      REGION: ${ssm:/${self:provider.stage}/App/Cognito/Region}
+      USER_POOL_ID: us-east-1_BgklXkhdl
+      CLIENT_ID: 7qjkjtrjqorknloa5m5d0655ap
+      RDS_HOST: ${ssm:/${self:provider.stage}/Database/Host}
+      RDS_PORT: ${ssm:/${self:provider.stage}/Database/Port}
+      RDS_USER: ${ssm:/${self:provider.stage}/Database/User}
+      RDS_PASSWORD: ${ssm:/${self:provider.stage}/Database/Password~true}
+      RDS_DATABASE: ${ssm:/${self:provider.stage}/Database/Name}
+
+custom:
+  webpack:
+    webpackConfig: "webpack.config.js"
+    packager: "yarn"
+    packagerOptions: {}
+    includeModules:
+      forceExclude:
+        - aws-sdk
+    defaultStage: dev
+  apiKeys:
+    - name: TropicalAuth
+      value: "4db9ac51d476d9b5798bde16aca99114"
+plugins:
+  - serverless-webpack
+  - serverless-offline
+  - serverless-add-api-key
+
+
