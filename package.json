@@ -5,6 +5,11 @@
     "express-async-handler": "^1.1.4",
     "serverless-http": "^2.5.0"
   },
+  "husky": {
+    "hooks": {
+      "prepare-commit-msg": "exec < /dev/tty && git cz --hook || true"
+    }
+  },
   "description": "A Boilerplate using serverless-offline, and typeScript",
   "devDependencies": {
     "@commitlint/cli": "^9.1.2",
@@ -27,11 +32,6 @@
     "typescript": "^3.9.7",
     "webpack": "^4.44.1",
     "webpack-node-externals": "^2.5.1"
-  },
-  "husky": {
-    "hooks": {
-      "prepare-commit-msg": "exec < /dev/tty && git cz --hook || true",
-    }
   },
   "license": "MIT",
   "main": "index.js",
