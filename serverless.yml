@@ -15,7 +15,6 @@ provider:
   runtime: nodejs12.x
   tags:
     projeto: teste-app
-  stage: ${opt:stage, 'dev'}
   memorySize: 128
   versionFunctions: false
   deploymentBucket:
